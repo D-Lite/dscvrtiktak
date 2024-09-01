@@ -11,6 +11,7 @@ import truncate from "@/utils/truncate"
 import Stepone from "@/components/Stepone"
 import toast, { Toaster } from "react-hot-toast"
 import Steptwo from "@/components/Steptwo"
+import Stepthree from "@/components/Stepthree"
 
 type ResultStatus = "idle" | "success" | "failed"
 
@@ -81,13 +82,14 @@ type ResultStatus = "idle" | "success" | "failed" | "skipped"
       () => currentFlow.id === 1 && (mode === 'player' && !opponentWallet), 
       () => currentFlow.id === 1 && !mode,
       () => currentFlow.id === 1 && !playerWallet,
-      () => currentFlow.id === 2 && result !== "success",
+      // () => currentFlow.id === 2 && (result !== "success" ?? result !== 'skipped'),
   ].some(condition => condition());
 
   return (
     <div className="flex flex-col items-center h-screen w-full">
       { currentFlow.id == 1 && <Stepone handleModeChange={handleModeChange} /> }
       { currentFlow.id == 2 && <Steptwo setResult={setResult} opponent={opponentWallet} /> }
+      { currentFlow.id == 3 && <Stepthree gameMode={mode} /> }
 
 
       <div className="w-full flex mt-40 h-24">
