@@ -10,23 +10,25 @@ import { generateSigner, signerIdentity, sol, transactionBuilder } from "@metapl
 import { fromWeb3JsPublicKey } from "@metaplex-foundation/umi-web3js-adapters";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
+import { siteConfig } from "@/config/site";
+import { Typography } from "./ui/typography";
+import Link from "next/link";
 
 
 type ResultStatus = "idle" | "success" | "failed" | "skipped"
 
 interface SteptwoProps {
   opponent: string;
-  player: string;
+  amount: string,
+  setAmount: (amount: string) => void,
   setResult: (status: ResultStatus) => void
 }
 
-const Steptwo: React.FC<SteptwoProps> = ({ opponent, setResult, player }) => {
+const Steptwo: React.FC<SteptwoProps> = ({ opponent, setResult, amount, setAmount }) => {
     const wallet = useWallet();
     const { publicKey } = wallet;
+    const { banker } = siteConfig;
 
-
-
-    const [amount, setAmount] = useState("")
     const [loading, setLoading] = useState(false)
     const [signature, setSignature] = useState("")
 
@@ -46,7 +48,7 @@ const Steptwo: React.FC<SteptwoProps> = ({ opponent, setResult, player }) => {
                 setResult("idle")
                 setSignature("")
 
-                const destination =  fromWeb3JsPublicKey(new PublicKey(opponent));
+                const destination =  fromWeb3JsPublicKey(new PublicKey(banker));
 
 
                 let builder = transactionBuilder()
@@ -65,14 +67,24 @@ const Steptwo: React.FC<SteptwoProps> = ({ opponent, setResult, player }) => {
         }
 
     return (
-        <div>
+        <div className="flex gap-10 flex-col">
             <div className="flex w-full items-center gap-5">
-            <Input fullWidth type="number" className="border border-black" value={amount} onChange={(event) => setAmount(event.target.value)} placeholder="Amount" />
-                <Button variant="solid2" fullWidth loading={loading} disabled={!opponent || !amount} onClick={submitTransaction}>
+                <Input fullWidth type="number" className="border border-black" value={amount} onChange={(event) => setAmount(event.target.value)} placeholder="Amount" />
+                <Button variant="solid2" fullWidth loading={loading} disabled={!banker || !amount} onClick={submitTransaction}>
                     Stake ahead of the game
                 </Button>
-        </div>
-            <Button variant="solid2"  onClick={() => setResult("skipped")}>
+            </div>
+            { signature.length > 1 && 
+                <a href={`https://explorer.solana.com/tx/${signature}?cluster=devnet`} 
+                    className="h-8 bg-orange-300 text-blue px-3 underline">
+                        Check transaction
+                </a>
+            }
+
+            <Typography level="body2" color="secondary" className="text-center">
+                <strong>Important Notice:</strong> The winner of the game will have the option to claim the staked amount. The system acts as a banker, securely holding the amount. Upon winning, the staked amount will be transferred directly to the winner's wallet. Please note that if you decide to skip this process, the staked amount will not be awarded to anyone.
+            </Typography>
+            <Button variant="outline"  onClick={() => setResult("skipped")}>
                     Skip
             </Button>
         </div>  
