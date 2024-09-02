@@ -56,14 +56,18 @@ type ResultStatus = "idle" | "success" | "failed" | "skipped"
   };
 
   useEffect(() => {
+    if(mode == "system") {
+      setOpponentWallet(banker);
+    }
+
     const wallets = {
       banker: banker,
       opponent: opponentWallet,
-      player: playerWallet,
+      player: publicKey,
       amount
     };
     localStorage.setItem('soltacwallets', JSON.stringify(wallets));
-  }, [banker, opponentWallet, playerWallet, amount]);
+  }, [banker, opponentWallet, playerWallet, amount, mode]);
 
   useEffect(() => {
     if (publicKey) {
@@ -95,7 +99,6 @@ type ResultStatus = "idle" | "success" | "failed" | "skipped"
       () => currentFlow.id === 1 && (mode === 'player' && !opponentWallet), 
       () => currentFlow.id === 1 && !mode,
       () => currentFlow.id === 1 && !playerWallet,
-      () => currentFlow.id === 2 && (result !== "success" ?? result !== 'skipped'),
   ].some(condition => condition());
 
   useEffect(() => {
@@ -118,11 +121,11 @@ type ResultStatus = "idle" | "success" | "failed" | "skipped"
     <div className="flex flex-col items-center h-screen w-full">
       { currentFlow.id == 1 && <Stepone handleModeChange={handleModeChange} /> }
       { currentFlow.id == 2 && <Steptwo amount={amount} setAmount={setAmount} setResult={setResult} opponent={opponentWallet} /> }
-      { currentFlow.id == 3 && <Stepthree gameMode={mode} /> }
+      { currentFlow.id == 3 && <Stepthree gameMode={mode} setResult={setResult} /> }
 
 
       <div className="w-full flex mt-40 h-24 gap-10">
-        <Button className="w-1/2" disabled={isDisabled} variant='solid2' onClick={() => goForward()}>  {gameflow[currentFlow.id].flow}  </Button>
+        {currentFlow.id !== gameflow.length-1 && <Button className="w-1/2" disabled={isDisabled} variant='solid2' onClick={() => goForward()}>  {gameflow[currentFlow.id].flow}  </Button>}
         <Button className="w-1/2 bg-red-500" variant='solid' onClick={resetGame}>End</Button> 
       </div>
 
