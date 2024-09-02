@@ -13,7 +13,12 @@ export const buttonVariants = tv({
   variants: {
     variant: {
       solid: ["bg-primary-400 text-white", "hover:bg-primary-600", "focus:ring-primary-100", "disabled:bg-primary-200"],
-      solid2: ["bg-electric-700 text-white", "hover:bg-electric-600", "focus:ring-electric-100", "disabled:bg-electric-200"],
+      solid2: [
+        "bg-electric-700 text-white",
+        "hover:bg-electric-600",
+        "focus:ring-electric-100",
+        "disabled:bg-electric-200",
+      ],
       outline: [
         "text-electric-400 border border-electric-400",
         "focus:ring-electric-100",

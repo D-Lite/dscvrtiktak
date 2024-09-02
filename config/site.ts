@@ -9,5 +9,5 @@ export const siteConfig: SiteConfig = {
     twitter: "https://www.twitter.com/danielolabemiwo",
     github: "https://www.github.com/d-lite",
   },
-  banker: "Gujtt3Tn5mQQgyjJFMt8D6kwH1zm4bPEB4cVPSGdCWsk"
+  banker: "Gujtt3Tn5mQQgyjJFMt8D6kwH1zm4bPEB4cVPSGdCWsk",
 }

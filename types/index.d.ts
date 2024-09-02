@@ -6,6 +6,6 @@ export type SiteConfig = {
   links: {
     twitter: string
     github: string
-  },
+  }
   banker: string
 }
