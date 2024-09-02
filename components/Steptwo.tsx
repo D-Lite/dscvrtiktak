@@ -1,16 +1,5 @@
-import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { PublicKey } from "@solana/web3.js";
-import { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
-import { mplToolbox, transferSol } from "@metaplex-foundation/mpl-toolbox";
-import { generateSigner, signerIdentity, sol, transactionBuilder } from "@metaplex-foundation/umi";
-import { fromWeb3JsPublicKey } from "@metaplex-foundation/umi-web3js-adapters";
-import { base58 } from "@metaplex-foundation/umi/serializers";
-import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
-import { siteConfig } from "@/config/site";
 import { Typography } from "./ui/typography";
 
 type ResultStatus = "idle" | "success" | "failed" | "skipped"
