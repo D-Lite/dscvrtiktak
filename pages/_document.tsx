@@ -1,7 +1,16 @@
+import { Metadata } from "next"
 import Document, { Head, Html, Main, NextScript } from "next/document"
+
+export const metadata: Metadata = {
+  other: {
+    "dscvr:canvas:version": "vNext",
+    "og:image": "https://my-canvas.com/preview-image.png",
+  }   
+}
 
 // Need to create a custom _document because i18n support is not compatible with `next export`.
 class MyDocument extends Document {
+
   // eslint-disable-next-line class-methods-use-this
   render() {
     return (

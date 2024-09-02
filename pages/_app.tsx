@@ -9,10 +9,20 @@ import type { FC } from "react"
 import React, { useMemo } from "react"
 import RootLayout from "@/components/layout"
 import { siteConfig } from "@/config/site"
+import { Metadata } from "next"
 
 // Use require instead of import since order matters
 require("@solana/wallet-adapter-react-ui/styles.css")
 require("../styles/globals.css")
+
+
+
+export const metadata: Metadata = {
+  other: {
+    "dscvr:canvas:version": "vNext",
+    "og:image": "https://my-canvas.com/preview-image.png",
+  }   
+}
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   // Can be set to 'devnet', 'testnet', or 'mainnet-beta'
