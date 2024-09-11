@@ -1,5 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import { useState, useContext, createContext, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { CanvasClient } from '@dscvr-one/canvas-client-sdk';
 import { registerCanvasWallet } from '@dscvr-one/canvas-wallet-adapter';
 import { Connection, PublicKey, Transaction } from '@solana/web3.js';
