@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container mx-auto w-full p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <a href="/" className="mb-4 flex items-center sm:mb-0">
-            <img src="/assets/logo.png" className="mr-3 h-8" alt={siteConfig.name} />
+            <img src="/assets/logo.svg" className="mr-3 h-8" alt={siteConfig.name} />
             <span className="self-center whitespace-nowrap text-2xl font-semibold">{siteConfig.name}</span>
           </a>
           <ul className="mb-6 flex flex-wrap items-center text-sm font-medium text-gray-500 sm:mb-0">

@@ -30,7 +30,7 @@ const Steptwo: React.FC<SteptwoProps> = ({ opponent, setResult, amount, setAmoun
         lose to the system, you will also be paying the system. However, you have the option to skip this process if you
         change your mind. Please note that if you do skip, the staked amount will not be awarded to anyone.
       </Typography>
-      <Button variant="outline" onClick={() => setResult("skipped")}>
+      <Button variant="outline" onClick={() => { setResult("skipped"); setAmount("0") }}>
         Skip
       </Button>
     </div>

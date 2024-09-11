@@ -10,11 +10,11 @@ import React, { useMemo } from "react"
 import RootLayout from "@/components/layout"
 import { siteConfig } from "@/config/site"
 import { Metadata } from "next"
+import { CanvasWalletProvider } from "@/components/canvas/CanvasWalletProvider"
 
 // Use require instead of import since order matters
 require("@solana/wallet-adapter-react-ui/styles.css")
 require("../styles/globals.css")
-
 
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   // Can be set to 'devnet', 'testnet', or 'mainnet-beta'
-  const network = WalletAdapterNetwork.Devnet
+  const network = WalletAdapterNetwork.Devnet;
 
   // You can also provide a custom RPC endpoint
   const endpoint = useMemo(() => clusterApiUrl(network), [network])
@@ -52,13 +52,15 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
       />
 
       <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect>
+        <CanvasWalletProvider>
+        <WalletProvider wallets={wallets} autoConnect={false}>
           <WalletModalProvider>
             <RootLayout>
               <Component {...pageProps} />
             </RootLayout>
           </WalletModalProvider>
         </WalletProvider>
+        </CanvasWalletProvider>
       </ConnectionProvider>
     </>
   )

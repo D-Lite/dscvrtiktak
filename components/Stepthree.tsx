@@ -6,7 +6,7 @@ import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-ad
 import { fromWeb3JsPublicKey } from "@metaplex-foundation/umi-web3js-adapters"
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base"
 import { useWallet } from "@solana/wallet-adapter-react"
-import { PublicKey } from "@solana/web3.js"
+import { clusterApiUrl, PublicKey } from "@solana/web3.js"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import toast from "react-hot-toast"
 import { Button } from "./ui/button"
@@ -203,7 +203,8 @@ const Stepthree: React.FC<{ gameMode: string; setResult: (status: ResultStatus) 
   const wallet = useWallet()
   const { publicKey } = wallet
 
-  const umi = createUmi("https://api.devnet.solana.com/").use(mplToolbox())
+console.log(clusterApiUrl("devnet"))
+  const umi = createUmi(clusterApiUrl("devnet")).use(mplToolbox())
   if (!publicKey) {
     const signer = generateSigner(umi)
     umi.use(signerIdentity(signer))
